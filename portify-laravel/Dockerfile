@@ -2,8 +2,8 @@
 FROM php:8.3-apache
 
 RUN apt-get update && apt-get install -y \
-    git unzip libzip-dev libicu-dev \
-    && docker-php-ext-install pdo_mysql bcmath intl zip \
+    git unzip libzip-dev libicu-dev libpq-dev \
+    && docker-php-ext-install pdo_mysql pdo_pgsql bcmath intl zip \
     && a2enmod rewrite \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -25,3 +25,4 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction \
     && chmod -R 775 storage bootstrap/cache
 
 EXPOSE 80
+    
